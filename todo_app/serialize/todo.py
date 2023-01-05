@@ -11,7 +11,10 @@ class TodoModel(BaseModel):
     brief: str
     detailed: str
     done: bool
-
+    
+    class Config:
+        orm_mode = True
+    
 
 class TodoInModel(BaseModel):
     brief: str

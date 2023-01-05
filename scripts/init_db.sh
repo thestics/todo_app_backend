@@ -1,0 +1,1 @@
+PGUSER=psotgres PGPASSWORD=postgres psql -h localhost -U postgres -w -c "create database todo_app;"

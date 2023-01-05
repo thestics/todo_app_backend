@@ -4,7 +4,6 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
-
 from todo_app.db import SQLALCHEMY_DATABASE_URL, Base
 from todo_app.db.models import Todo
 

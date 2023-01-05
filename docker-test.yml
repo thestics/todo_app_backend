@@ -1,0 +1,43 @@
+version: '3'
+
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - db_network
+    environment:
+      - APP_ENV=test
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_NAME=test_app
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    command:
+      - /bin/bash
+      - -c
+      - | 
+        alembic upgrade head
+        pytest
+    deploy:
+      restart_policy:
+        condition: on-failure
+
+  db:
+    image: postgres:11
+    networks:
+      - db_network
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - ./scripts/init_db.sql:/docker-entrypoint-initdb.d/init.sql
+
+networks:
+  db_network:
+    driver: bridge

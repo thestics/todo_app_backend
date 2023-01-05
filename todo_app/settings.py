@@ -12,7 +12,8 @@ from pydantic import BaseSettings
 class Env(enum.Enum):
     dev = 'dev'
     prod = 'prod'
-
+    test = 'test'
+    
 
 class DbSettings(BaseSettings):
     DB_USERNAME: str
